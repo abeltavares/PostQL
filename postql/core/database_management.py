@@ -121,7 +121,7 @@ class DatabaseManagement:
             self.logger.error(f"Failed to delete user '{username}'.")
 
     def create_table(self, name, schema):
-        query = sql.SQL("CREATE TABLE IF NOT EXISTS {} ({})").format(
+        query = sql.SQL("CREATE TABLE {} ({})").format(
             sql.Identifier(name),
             sql.SQL(", ").join(
                 sql.SQL("{} {}").format(sql.Identifier(col), sql.SQL(data_type))
@@ -133,7 +133,7 @@ class DatabaseManagement:
                 cursor.execute(query)
                 self.logger.info(f"Table '{name}' created.")
         except psycopg2.Error as e:
-            self.logger.error(f"Failed to create table '{name}'.")
+            self.logger.error(f"Failed to create table '{name}': {e}.")
 
     def drop_table(self, name):
         query = sql.SQL("DROP TABLE IF EXISTS {}").format(sql.Identifier(name))

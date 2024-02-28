@@ -39,20 +39,56 @@ exit
 ```python
 from postql import Postgres
 
-# Create a connection to the database
+# Initialize the Postgres connection
 db = Postgres(host="localhost", port="5432", user="postgres", password="password")
 
-# Connect to a specific database
-db.connect(database="my_database")
+# Connect to the 'bookstore' database
+db.connect(database="market_data")
 
-# Execute SQL queries
-db.sql("SELECT * FROM my_table")
+# Create the 'books' table
+db.create_table("books", {
+    "id": "SERIAL PRIMARY KEY",
+    "title": "VARCHAR(255) NOT NULL",
+    "author": "VARCHAR(255) NOT NULL",
+    "price": "DECIMAL(10, 2) NOT NULL",
+    "genre": "VARCHAR(255)"
+})
 
-# Export query results
-db.select(table="users") \
-    .where({'age': ('>', 25)}) \
-    .to_csv("users_result.csv")
+# Create the 'orders' table
+db.create_table("orders", {
+    "id": "SERIAL PRIMARY KEY",
+    "book_id": "INTEGER REFERENCES books(id)",
+    "quantity": "INTEGER NOT NULL",
+    "customer_name": "VARCHAR(255) NOT NULL",
+    "order_date": "DATE NOT NULL"
+})
 
+# Insert sample books
+db.insert("books", {"title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "price": 15.99, "genre": "Fiction"}).execute()
+db.insert("books", {"title": "To Kill a Mockingbird", "author": "Harper Lee", "price": 12.99, "genre": "Fiction"}).execute()
+
+# Insert a sample order
+db.insert("orders", {"book_id": 1, "quantity": 2, "customer_name": "John Doe", "order_date": "2023-04-01"}).execute()
+
+# Query all books
+print("All books:")
+db.select("books",["title"]).execute()
+
+# Query all orders for a specific book
+print("Orders for 'The Great Gatsby':")
+db.select("orders").where({"book_id": 1}).execute()
+
+# Update the price of a book
+db.update("books").set({"price": 14.99}).where({"id": 1}).execute()
+
+# Export books to a CSV file
+db.select("books").to_csv("books.csv")
+
+# Export orders to a CSV file
+db.select("orders").to_csv("orders.csv")
+
+# Disconnect from the database
+db.disconnect()
 ```
 
 ## Documentation

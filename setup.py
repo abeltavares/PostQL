@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="PostQL",
-    version="1.0.2",
+    version="1.0.3",
     description="Python wrapper for Postgres",
     long_description=long_description,
     long_description_content_type="text/markdown",
