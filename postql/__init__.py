@@ -1,6 +1,6 @@
 import logging
-from postql.core.database_management import DatabaseManagement
-from postql.core.data_operations import DataOperations
+from .core.database_management import DatabaseManagement
+from .core.data_operations import DataOperations
 
 logging.basicConfig(
     level=logging.INFO,
