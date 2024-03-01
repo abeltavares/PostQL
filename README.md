@@ -1,5 +1,23 @@
 # PostQL
 
+<p align="center">
+    <img src="assets/postql.png">
+</p>
+
+<p align="center">
+    <a href="https://github.com/abeltavares/postql">
+        <img src="https://img.shields.io/badge/GitHub-Repository-blue?logo=github" alt="GitHub Repository">
+    </a>
+    <a href="https://pypi.org/project/PostQL/">
+        <img src="https://img.shields.io/pypi/v/PostQL" alt="PyPI">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+    </a>
+</p>
+
+<br>
+
 PostQL is a Python library and command-line interface (CLI) tool for managing PostgreSQL databases, executing queries, exporting data and interacting with PostgreSQL databases from the command line.
 
 ## Features
@@ -34,6 +52,9 @@ my_database> Select * from my_table
 exit
 
 ```
+
+![demo](assets/postql.gif)
+
 ### Python Library
 
 ```python
@@ -93,8 +114,8 @@ db.disconnect()
 
 ## Documentation
 
-- [Methods Documentation](https://abeltavares.github.io/PostQL/methods.html)
-- [CLI Documentation](https://abeltavares.github.io/PostQL/cli.html)
+- [Methods Documentation](docs/methods.md)
+- [CLI Documentation](docs/cli.md)
 
 ## Contributing
 
